@@ -1,7 +1,14 @@
--- credits: Glazer, BBQ (idiot bought someone who used chatgpt for original) Korisnik
-local gui = Instance.new("ScreenGui")
-gui.Name = "Jinquilivuscript"
-gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+--[[
+      _ _                   _ _ _ _             ____            _       _   
+     | (_)_ __   __ _ _   _(_) | (_)_   ___   _/ ___|  ___ _ __(_)_ __ | |_ 
+  _  | | | '_ \ / _` | | | | | | | \ \ / / | | \___ \ / __| '__| | '_ \| __|
+ | |_| | | | | | (_| | |_| | | | | |\ V /| |_| |___) | (__| |  | | |_) | |_ 
+  \___/|_|_| |_|\__, |\__,_|_|_|_|_| \_/  \__,_|____/ \___|_|  |_| .__/ \__|
+                   |_|                                           |_|        
+Made by Glazer
+Credits to BBQ
+Brought to you by Jinquillivus Productions
+]]--
 
 -- Main Frame
 local mainFrame = Instance.new("Frame")
