@@ -13,7 +13,7 @@ print("https://github.com/dehoisted/Chat-Spy")
 Config = {
 	enabled = true,
 	spyOnMyself = true,
-	public = false,
+	public = true,
 	publicItalics = true
 }
 
