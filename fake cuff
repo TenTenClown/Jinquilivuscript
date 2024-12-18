@@ -1,0 +1,119 @@
+ local cuffanim = "http://www.roblox.com/Asset?ID=2027914996"
+    local anim = Instance.new("Animation")
+    local main = Instance.new("ScreenGui")
+    local frame = Instance.new("Frame")
+    local username = Instance.new("TextBox")
+    local prankbutton = Instance.new("TextButton")
+    local notpranking = true
+    local plr = game.Players.LocalPlayer
+    local debounce = true
+    anim.AnimationId = cuffanim
+    main.ResetOnSpawn = false
+    local PlayAnimation = plr.Character.Humanoid:LoadAnimation(anim)
+    
+    frame.Selectable = true
+    frame.Active = true
+    frame.Draggable = true
+    frame.Size = UDim2.new(.4,0,.1,0)
+    username.Position = UDim2.new(.1,0,0,0)
+    username.Size = UDim2.new(.6,0,1,0)
+    prankbutton.Size = UDim2.new(.3,0,1,0)
+    prankbutton.Position = UDim2.new(.7,0,0,0)
+    prankbutton.Parent = frame
+    username.Parent = frame
+    function check(humanoid)
+        local m = humanoid:GetPlayingAnimationTracks()
+        for i = 1, #m do
+            if m[i].Animation.AnimationId == cuffanim then
+                return m[i]
+            end
+        end
+        return false
+    end
+    frame.Parent = main
+    prankbutton.Text = "Cuff"
+    prankbutton.TextScaled = true
+    main.Parent = plr.PlayerGui
+    username.Text = ''
+    username.PlaceholderText = "Put username here"
+    prankbutton.MouseButton1Down:Connect(function()
+        if notpranking then
+            local allplayers = game.Players:GetChildren()
+            local s = nil
+            for i = 1, #allplayers do
+                if string.find(string.lower(allplayers[i].Name), string.lower(username.Text)) and username.Text ~= '' then
+                    s = allplayers[i]
+                    break
+                end
+            end
+    
+            if s then
+                notpranking = false
+                prankbutton.Text = 'stop'
+    local PlayAnimation = plr.Character:WaitForChild("Humanoid"):LoadAnimation(anim)
+                PlayAnimation:Play()
+                local character = s.Character
+                local currentSpeed = 0
+                local pos = character.HumanoidRootPart.Position
+                while notpranking == false do
+                    if game.Players:FindFirstChild(s.Name) then 
+                        if s.Character:FindFirstChild("UpperTorso") and plr.Character:FindFirstChild("HumanoidRootPart") then
+                            pos = Vector3.new(character.HumanoidRootPart.Position.X, 0, character.HumanoidRootPart.Position.Z)
+                            task.wait(.01)
+                            if s.Character then
+                            if s.Character.Humanoid.Health ~= 0 then
+                            if s.Character:FindFirstChild("UpperTorso") then
+                            currentSpeed = (pos-Vector3.new(character:WaitForChild("HumanoidRootPart").Position.X, 0, character.HumanoidRootPart.Position.Z)).magnitude
+                            plr.Character.HumanoidRootPart.CFrame = s.Character:FindFirstChild("UpperTorso").CFrame
+                            local dotof = s.Character.Humanoid.MoveDirection:Dot(s.Character.HumanoidRootPart.CFrame.LookVector)
+                            plr.Character.HumanoidRootPart.CFrame += plr.Character.HumanoidRootPart.CFrame.LookVector * (2.5 + currentSpeed*4*dotof)
+                                plr.Character.HumanoidRootPart.CFrame *= CFrame.Angles(math.rad(15), 0, 0)
+                            end
+                            else
+                                notpranking = true
+                                prankbutton.Text = "Cuff"
+                                end
+                            if plr.Character:WaitForChild("Humanoid").Sit == true then
+                                plr.Character.Humanoid.Sit = false
+                            end
+                            else
+                            task.wait(.01)
+                            
+                        end
+                        else
+                        task.wait(.01)
+                        prankbutton.Text = "Cuff"
+                        notpranking = true
+                        end
+                    else
+                        task.wait(.01)
+                        prankbutton.Text = "Cuff"
+                        notpranking = true
+                    end
+                end
+                if check(plr.Character.Humanoid) ~= nil then
+                check(plr.Character.Humanoid):Stop()
+                end
+            else
+                if debounce then
+                    debounce = false
+                    username.Text = "Invalid Username."
+                    username.PlaceholderText = "Invalid Username."
+                    wait(2)
+                    username.Text = ""
+                    username.PlaceholderText = "Put username here"
+                    debounce = true
+                end
+            end
+        else
+            prankbutton.Text = "Cuff"
+            notpranking = true
+        end
+    end)
+    plr.CharacterAdded:Connect(function()
+        if not notpranking then
+            PlayAnimation = plr.Character:WaitForChild("Humanoid"):LoadAnimation(anim)
+            repeat PlayAnimation:Play() wait()
+            until check(plr.Character.Humanoid) ~= nil
+        end
+    end)
