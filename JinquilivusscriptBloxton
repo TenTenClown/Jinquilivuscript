@@ -1,0 +1,208 @@
+--[[
+      _ _                   _ _ _ _             ____            _       _   
+     | (_)_ __   __ _ _   _(_) | (_)_   ___   _/ ___|  ___ _ __(_)_ __ | |_ 
+  _  | | | '_ \ / _` | | | | | | | \ \ / / | | \___ \ / __| '__| | '_ \| __|
+ | |_| | | | | | (_| | |_| | | | | |\ V /| |_| |___) | (__| |  | | |_) | |_ 
+  \___/|_|_| |_|\__, |\__,_|_|_|_|_| \_/  \__,_|____/ \___|_|  |_| .__/ \__|
+                   |_|                                           |_|        
+Made by Glazer
+Credits to BBQ
+Brought to you by Jinquillivus Productions
+]]--
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "Glazer's Washiez Hub"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 400, 0, 250) -- Adjusted size to fit all buttons
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -325)
+mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = gui
+
+mainFrame.Active = true
+mainFrame.Draggable = true
+
+local mainUICorner = Instance.new("UICorner")
+mainUICorner.CornerRadius = UDim.new(0, 10)
+mainUICorner.Parent = mainFrame
+
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(230, 0, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 0, 50))
+}
+gradient.Parent = mainFrame
+
+local title = Instance.new("TextLabel")
+title.Name = "Title"
+title.Text = "Jinquilivusscript"
+title.Font = Enum.Font.GothamBold
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 18
+title.Size = UDim2.new(1, 0, 0, 80)
+title.BackgroundTransparency = 1
+title.Parent = mainFrame
+
+local closeButton = Instance.new("TextButton")
+closeButton.Name = "CloseButton"
+closeButton.Text = "X"
+closeButton.Size = UDim2.new(0, 40, 0, 40)
+closeButton.Position = UDim2.new(1, -50, 0, 10)
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 24
+closeButton.Parent = mainFrame
+
+local closeUICorner = Instance.new("UICorner")
+closeUICorner.CornerRadius = UDim.new(0, 10)
+closeUICorner.Parent = closeButton
+
+closeButton.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
+
+local function createButton(name, scriptFunc, position)
+    local button = Instance.new("TextButton")
+    button.Name = name .. "Button"
+    button.Text = name
+    button.Size = UDim2.new(0, 360, 0, 40)
+    button.Position = UDim2.new(0.5, -180, 0, position)
+    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.Gotham
+    button.TextSize = 16
+    button.Parent = mainFrame
+
+    local buttonUICorner = Instance.new("UICorner")
+    buttonUICorner.CornerRadius = UDim.new(0, 8)
+    buttonUICorner.Parent = button
+
+    button.MouseButton1Click:Connect(scriptFunc)
+end
+
+createButton("Penis Plate", function()
+loadstring(game:HttpGet("https://tuxer.xyz/loader?file=penisplates"))()
+end, 50)
+
+createButton("GlazerBot", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
+end, 100)
+
+createButton("fake cuff", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/fakecuff"))()
+end, 150)
+
+-- Hide Button
+local hideButton = Instance.new("TextButton")
+hideButton.Name = "HideButton"
+hideButton.Text = "Hide"
+hideButton.Size = UDim2.new(0, 378.5, 0, 40)
+hideButton.Position = UDim2.new(0.154, -50, 1, -50)
+hideButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+hideButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+hideButton.Font = Enum.Font.GothamBold
+hideButton.TextSize = 18
+hideButton.Parent = mainFrame
+
+local hideUICorner = Instance.new("UICorner")
+hideUICorner.CornerRadius = UDim.new(0, 8)
+hideUICorner.Parent = hideButton
+
+local unhideButton = Instance.new("TextButton")
+unhideButton.Name = "UnhideButton"
+unhideButton.Text = "Unhide GUI"
+unhideButton.Size = UDim2.new(0, 100, 0, 20)
+unhideButton.Position = UDim2.new(0.7658, 10, 0, 715)
+unhideButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+unhideButton.TextColor3 = Color3.fromRGB(0, 255, 0)
+unhideButton.Font = Enum.Font.GothamBold
+unhideButton.TextSize = 13
+unhideButton.Visible = false
+unhideButton.Parent = gui
+
+unhideButton.Active = true
+unhideButton.Draggable = false
+
+local unhideUICorner = Instance.new("UICorner")
+unhideUICorner.CornerRadius = UDim.new(0, 0)
+unhideUICorner.Parent = unhideButton
+
+hideButton.MouseButton1Click:Connect(function()
+    mainFrame.Visible = false
+    unhideButton.Visible = true
+end)
+
+unhideButton.MouseButton1Click:Connect(function()
+    mainFrame.Visible = true
+    unhideButton.Visible = false
+end)
+
+while true do
+ wait(2)
+ local Players = game:GetService("Players")
+
+    for _, player in ipairs(Players:GetPlayers()) do
+    local groupInfo = player:FindFirstChild("GroupInfo")
+    if groupInfo then
+        local role = groupInfo:FindFirstChild("Role")
+        if role and string.find(role.Value:lower(), "director") then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Washiez";
+                Text = player.Name.." = director ";
+                Duration = 5;
+            })
+        end
+    end
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    local groupInfo = player:FindFirstChild("GroupInfo")
+    if groupInfo then
+        local role = groupInfo:FindFirstChild("Role")
+        if role and string.find(role.Value:lower(), "director") then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Washiez";
+                Text = player.Name.." = director";
+                Duration = 5;
+            })
+        end
+    end
+end)
+
+
+
+local Players = game:GetService("Players")
+
+for _, player in ipairs(Players:GetPlayers()) do
+    local groupInfo = player:FindFirstChild("GroupInfo")
+    if groupInfo then
+        local role = groupInfo:FindFirstChild("Role")
+        if role and string.find(role.Value:lower(), "corporate") then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Washiez";
+                Text = player.Name.." = corperate";
+                Duration = 5;
+            })
+        end
+    end
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    local groupInfo = player:FindFirstChild("GroupInfo")
+    if groupInfo then
+        local role = groupInfo:FindFirstChild("Role")
+        if role and string.find(role.Value:lower(), "corporate") then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Washiez";
+                Text = player.Name.." = corperate";
+                Duration = 5;
+            })
+        end
+    end
+end)
+end
