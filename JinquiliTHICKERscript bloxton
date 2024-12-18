@@ -17,8 +17,8 @@ gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 -- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 400, 0, 400) -- Adjusted size to fit all buttons
-mainFrame.Position = UDim2.new(0.5, -200, 0.5, -550)
+mainFrame.Size = UDim2.new(0, 400, 0, 550) -- Adjusted size to fit all buttons
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -350)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 mainFrame.BorderSizePixel = 0
 mainFrame.Parent = gui
