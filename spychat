@@ -51,7 +51,7 @@ PrivateProperties = {
 				conn:Disconnect()
 				if hidden and Config.enabled then
 					if Config.public then
-						saymsg:FireServer((Config.publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
+						saymsg:FireServer((Config.publicItalics and "BH leaks" or 'BH leaks').."leaks: [".. p.Name .."]: "..msg,"All")
 					else
 						PrivateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
 						StarterGui:SetCore("ChatMakeSystemMessage", PrivateProperties)
