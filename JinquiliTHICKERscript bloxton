@@ -242,7 +242,7 @@ PrivateProperties = {
 	chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
 end, 100)
 
-createButton("Penis Plate", function()
+createButton("See Warnings", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/illumina0001/bloxton/main/seewarnings.lua"))()
 end, 150)
 
