@@ -164,7 +164,7 @@ local room = {
 	"could you help? Im looking for room 666",
 	"GLM will rule this hotel!",
 	"I want a GLM mint milkshake",
-	"GLMGLMGLMGLMGLMGLMGLMGLMGLMGLM"
+	"GLM"
 }
 
 
@@ -178,7 +178,7 @@ local cuffeds = {
 	"JUST QUIT YOUR JOB",
 	"F<>U<>C<>K bloxton RBLXleaks/Tuxer X GLM man",
 	"⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻",
-	"GLMGLMGLMGLMGLMGLMGLMGLMGLMGLMGLMGLMGLMGLMGLM"
+	"GLM"
 }
 
 local whyareyounotcleaningmyroom = {
@@ -201,7 +201,7 @@ local whyareyounotcleaningmyroom = {
 	"Your my S<>L<>A<>V<>E housekeeper get back to work!",
 	"Your role is green why aren't you in glm!??",
 	"No room clean because im glm? Racist",
-	"GLMGLMGLMGLMGLMGLMGLM",
+	"GLM",
 	"⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻"
 }
 
@@ -981,7 +981,7 @@ function bar() -- aa
 
 	pcall(function()
 		local args = {
-			[1] = "May I get a Mint Milkshake brewed in the Sahara?? ",----asks for food
+			[1] = "May I get a Mint Milkshake? ",----asks for food
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
