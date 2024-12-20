@@ -10,8 +10,6 @@ Credits to BBQ
 Brought to you by Jinquillivus Productions
 ]]--
 
-mainFrame.ResetOnSpawn = false
-
 local gui = Instance.new("ScreenGui")
 gui.Name = "Glazer's Washiez Hub"
 gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
