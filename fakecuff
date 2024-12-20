@@ -10,15 +10,16 @@
     anim.AnimationId = cuffanim
     main.ResetOnSpawn = false
     local PlayAnimation = plr.Character.Humanoid:LoadAnimation(anim)
-    
+
     frame.Selectable = true
     frame.Active = true
     frame.Draggable = true
-    frame.Size = UDim2.new(.4,0,.1,0)
-    username.Position = UDim2.new(.1,0,0,0)
-    username.Size = UDim2.new(.6,0,1,0)
-    prankbutton.Size = UDim2.new(.3,0,1,0)
-    prankbutton.Position = UDim2.new(.7,0,0,0)
+    frame.Size = UDim2.new(.1,0,0.1,50)
+    frame.Position = UDim2.new(0.000001,0,0,658)
+    username.Position = UDim2.new(0.000001,0,0,0)
+    username.Size = UDim2.new(.7,0,1,-65)
+    prankbutton.Size = UDim2.new(.7,0,1,-65)
+    prankbutton.Position = UDim2.new(0.000001,0,0,65)
     prankbutton.Parent = frame
     username.Parent = frame
     function check(humanoid)
