@@ -17,7 +17,7 @@ gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 -- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 400, 0, 600) -- Adjusted size to fit all buttons
+mainFrame.Size = UDim2.new(0, 400, 0, 650) -- Adjusted size to fit all buttons
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -350)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 mainFrame.BorderSizePixel = 0
@@ -262,17 +262,21 @@ createButton("GlazerBot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
 end, 350)
 
+createButton("ScalpBot", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
+end, 400)
+
 createButton("fake cuff", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/fakecuff"))()
-end, 400)
+end, 450)
 
 createButton("Ghost Mode", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(2).txt'))()
-end, 450)
+end, 500)
 
 createButton("R6", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(6).txt'))()
-end, 500)
+end, 550)
 
 createButton("animation changer", function()
 local AnimationChanger = Instance.new("ScreenGui")
