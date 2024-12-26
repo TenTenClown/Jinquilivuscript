@@ -264,11 +264,11 @@ createButton("infinite yield", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end, 350)
 
-createButton("GlazerBot", function()
+createButton("Glazer Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
 end, 400)
 
-createButton("ScalpBot", function()
+createButton("Scalp Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
 end, 450)
 
