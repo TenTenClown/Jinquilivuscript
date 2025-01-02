@@ -267,7 +267,7 @@ end, 350)
 createButton("Glazer Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
 end, 400)
-
+-yahoo
 createButton("Scalp Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
 end, 450)
