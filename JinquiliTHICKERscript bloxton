@@ -19,7 +19,7 @@ gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 -- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 400, 0, 650) -- Adjusted size to fit all buttons
+mainFrame.Size = UDim2.new(0, 400, 0, 530) -- Adjusted size to fit all buttons
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -350)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 mainFrame.BorderSizePixel = 0
@@ -72,7 +72,7 @@ local function createButton(name, scriptFunc, position)
     local button = Instance.new("TextButton")
     button.Name = name .. "Button"
     button.Text = name
-    button.Size = UDim2.new(0, 360, 0, 40)
+    button.Size = UDim2.new(0, 360, 0, 25)
     button.Position = UDim2.new(0.5, -180, 0, position)
     button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -163,7 +163,7 @@ PrivateProperties = {
 	local chatFrame = player.PlayerGui.Chat.Frame
 	chatFrame.ChatChannelParentFrame.Visible = true
 	chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
-end, 50)
+end, 60)
 
 createButton("Spychat", function()
 --[[
@@ -242,47 +242,47 @@ PrivateProperties = {
 	local chatFrame = player.PlayerGui.Chat.Frame
 	chatFrame.ChatChannelParentFrame.Visible = true
 	chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
-end, 100)
+end, 90)
 
 createButton("See Warnings", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/illumina0001/bloxton/main/seewarnings.lua"))()
-end, 150)
+end, 120)
 
 createButton("Bypasser", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AlgariBot/lua/refs/heads/Lua-Script-Executor/LocalNeverPatchedBypass.txt"))()
-end, 200)
+end, 150)
 
 createButton("Penis Plate", function()
 loadstring(game:HttpGet("https://tuxer.xyz/loader?file=penisplates"))()
-end, 250)
+end, 180)
 
 createButton("Nameless", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))()
-end, 300)
+end, 210)
 
 createButton("infinite yield", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-end, 350)
+end, 240)
 
 createButton("Glazer Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
-end, 400)
+end, 270)
 --yahoo
 createButton("Scalp Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
-end, 450)
+end, 300)
 
 createButton("fake cuff", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/fakecuff"))()
-end, 500)
+end, 330)
 
 createButton("Ghost Mode", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(2).txt'))()
-end, 550)
+end, 360)
 
 createButton("R6", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(6).txt'))()
-end, 600)
+end, 390)
 
 createButton("animation changer", function()
 local AnimationChanger = Instance.new("ScreenGui")
@@ -963,6 +963,10 @@ end)
 
 wait(1)
 Main:TweenPosition(UDim2.new(0.421999991, 0, 0.28400004, 0))
+end, 420)
+
+createButton("jerkin", function()
+loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
 end, 450)
 
 -- Hide Button
