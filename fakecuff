@@ -15,7 +15,7 @@
     frame.Active = true
     frame.Draggable = true
     frame.Size = UDim2.new(.1,0,0.1,50)
-    frame.Position = UDim2.new(0.000001,0,0,658)
+    frame.Position = UDim2.new(0.000001,0,0,610)
     username.Position = UDim2.new(0.000001,0,0,0)
     username.Size = UDim2.new(.7,0,1,-65)
     prankbutton.Size = UDim2.new(.7,0,1,-65)
