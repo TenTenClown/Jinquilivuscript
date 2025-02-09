@@ -1,6 +1,7 @@
 getgenv().speed = 16
 getgenv().walkspeed = 16
 getgenv().DisableAnimate = false
+getgenv().noclip = true
 
 getgenv().AnimationPack = "Mage"
 --[[
