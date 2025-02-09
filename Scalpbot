@@ -2,6 +2,8 @@ getgenv().speed = 45
 getgenv().walkspeed = 45
 getgenv().DisableAnimate = false
 
+getgenv().noclip = true
+
 getgenv().AnimationPack = "Mario"
 --[[
 Knight
