@@ -19,7 +19,7 @@ gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 -- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 400, 0, 530) -- Adjusted size to fit all buttons
+mainFrame.Size = UDim2.new(0, 400, 0, 560) -- Adjusted size to fit all buttons
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -350)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 mainFrame.BorderSizePixel = 0
@@ -968,6 +968,10 @@ end, 420)
 createButton("jerkin", function()
 loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
 end, 450)
+
+createButton("Dead Body Pose", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/y9T3mzqD"))()
+end, 480)
 
 -- Hide Button
 local hideButton = Instance.new("TextButton")
