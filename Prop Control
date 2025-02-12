@@ -1,0 +1,540 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local equipped = false
+local uiOpen = false
+local currentTool = nil
+local controlPart = nil
+local MOVE_SPEED = 0.5
+local ROTATION_SPEED = .1
+local defaultWalkSpeed = 16
+local defaultJumpPower = 50
+local toolAnimTrack = nil
+local viewportTool = nil
+local viewportRotation = Vector3.new(0, 0, 0)
+local cameraRotation = Vector3.new(0, 0, 0)
+local camera = workspace.CurrentCamera
+local screenCenter = Vector2.new()
+
+local function updateScreenCenter()
+	local viewportSize = camera.ViewportSize
+	screenCenter = Vector2.new(viewportSize.X/2, viewportSize.Y/2)
+end
+
+updateScreenCenter()
+camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScreenCenter)
+
+local function getRotationFromMousePosition()
+	local mousePos = UserInputService:GetMouseLocation()
+	local deltaX = (mousePos.X - screenCenter.X) / screenCenter.X
+
+	return Vector3.new(
+		0,
+		-deltaX * ROTATION_SPEED,
+		0
+	)
+end
+
+local pressedKeys = {
+	[Enum.KeyCode.W] = false,
+	[Enum.KeyCode.A] = false,
+	[Enum.KeyCode.S] = false,
+	[Enum.KeyCode.D] = false,
+	[Enum.KeyCode.Q] = false,
+	[Enum.KeyCode.E] = false
+}
+
+local function handleToolAnimation()
+	local humanoid = character:FindFirstChild("Humanoid")
+	if not humanoid then return end
+
+	local animator = humanoid:FindFirstChild("Animator")
+	if not animator then return end
+	for _, track in ipairs(animator:GetPlayingAnimationTracks()) do
+		if track.Animation and 
+			(string.match(track.Animation.Name:lower(), "tool") or 
+				string.match(track.Animation.Name:lower(), "item")) then
+			track:Stop()
+			toolAnimTrack = track
+			track.Playing:Connect(function()
+				if equipped then
+					track:Stop()
+				end
+			end)
+		end
+	end
+	animator.AnimationPlayed:Connect(function(track)
+		if equipped and track.Animation and 
+			(string.match(track.Animation.Name:lower(), "tool") or 
+				string.match(track.Animation.Name:lower(), "item")) then
+			track:Stop()
+			toolAnimTrack = track
+		end
+	end)
+end
+
+local function lockPlayerMovement()
+	local humanoid = character:FindFirstChild("Humanoid")
+	if humanoid then
+		defaultWalkSpeed = humanoid.WalkSpeed
+		defaultJumpPower = humanoid.JumpPower
+		humanoid.WalkSpeed = 0
+		humanoid.JumpPower = 0
+	end
+end
+
+local function restorePlayerMovement()
+	local humanoid = character:FindFirstChild("Humanoid")
+	if humanoid then
+		humanoid.WalkSpeed = defaultWalkSpeed
+		humanoid.JumpPower = defaultJumpPower
+	end
+end
+
+local function createControlPart()
+	controlPart = Instance.new("Part")
+	controlPart.Name = "DroneControlPart"
+	controlPart.Transparency = 1
+	controlPart.CanCollide = false
+	controlPart.Anchored = true
+	controlPart.Parent = workspace
+end
+
+local function enableDroneControl()
+	if currentTool then
+		local handle = currentTool:FindFirstChild("Handle")
+		if handle then
+			local head = character:FindFirstChild("Head")
+			handle.Massless = true
+			currentTool.Parent = player.Backpack
+			createControlPart()
+			controlPart.CFrame = head.CFrame * CFrame.new(0, 0, -5)
+			if viewportRotation then
+				controlPart.CFrame = controlPart.CFrame * CFrame.fromEulerAnglesXYZ(viewportRotation.X, viewportRotation.Y, viewportRotation.Z)
+			end
+			character.DescendantAdded:Connect(function(descendant)
+				if descendant:IsA("Weld") and descendant.Name == "RightGrip" and descendant.Part1 == handle then
+					descendant.C0 = descendant.Part0.CFrame:Inverse()
+					descendant.C1 = controlPart.CFrame:Inverse()
+				end
+			end)
+			currentTool.Parent = character
+			handleToolAnimation()
+			lockPlayerMovement()
+			equipped = true
+			camera.CameraType = Enum.CameraType.Scriptable
+			RunService:BindToRenderStep("DroneCameraUpdate", Enum.RenderPriority.Camera.Value, function(deltaTime)
+				if equipped and controlPart then
+					local rotationChange = getRotationFromMousePosition()
+					local currentRotation = controlPart.CFrame
+					local newRotation = currentRotation * CFrame.Angles(rotationChange.X, rotationChange.Y, rotationChange.Z)
+					controlPart.CFrame = newRotation
+					camera.CFrame = newRotation
+					if currentTool then
+						currentTool.Parent = player.Backpack
+						currentTool.Parent = character
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function disableDroneControl()
+	if controlPart then
+		controlPart:Destroy()
+		controlPart = nil
+	end
+	if toolAnimTrack then
+		toolAnimTrack:Play()
+		toolAnimTrack = nil
+	end
+	RunService:UnbindFromRenderStep("DroneCameraUpdate")
+	camera.CameraType = Enum.CameraType.Custom
+	UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+	restorePlayerMovement()
+	equipped = false
+	local droneUI = player.PlayerGui:FindFirstChild("DroneControlUI")
+	if droneUI then
+		droneUI:Destroy()
+	end
+	uiOpen = false
+end
+
+local function equipFirstTool()
+	local backpack = player:WaitForChild("Backpack")
+	local tools = backpack:GetChildren()
+	for _, tool in ipairs(tools) do
+		if tool:IsA("Tool") then
+			currentTool = tool
+			enableDroneControl()
+			return true
+		end
+	end
+
+	return false
+end
+
+local function updateDronePosition(moveVector)
+	if controlPart and equipped then
+		local lookVector = camera.CFrame.LookVector
+		local rightVector = camera.CFrame.RightVector
+		local flatLookVector = Vector3.new(lookVector.X, 0, lookVector.Z).Unit
+		local flatRightVector = Vector3.new(rightVector.X, 0, rightVector.Z).Unit
+		local finalMoveVector = Vector3.new(0, 0, 0)
+
+		if moveVector.Z ~= 0 then
+			finalMoveVector = finalMoveVector + (flatLookVector * -moveVector.Z)
+		end
+		if moveVector.X ~= 0 then
+			finalMoveVector = finalMoveVector + (flatRightVector * moveVector.X)
+		end
+
+		finalMoveVector = finalMoveVector + Vector3.new(0, moveVector.Y, 0)
+		local newPosition = controlPart.Position + finalMoveVector
+		controlPart.CFrame = CFrame.new(newPosition) * controlPart.CFrame.Rotation
+		if currentTool then
+			currentTool.Parent = player.Backpack
+			currentTool.Parent = character
+		end
+	end
+end
+
+local function createViewportInterface()
+	local screenGui = Instance.new("ScreenGui")
+	screenGui.Name = "DroneControlUI"
+	screenGui.Parent = player.PlayerGui
+
+	local mainFrame = Instance.new("Frame")
+	mainFrame.Size = UDim2.new(0, 300, 0, 520)
+	mainFrame.Position = UDim2.new(1, -320, 0, 20)
+	mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	mainFrame.BorderSizePixel = 0
+	mainFrame.Parent = screenGui
+
+	local viewport = Instance.new("ViewportFrame")
+	viewport.Size = UDim2.new(1, -20, 0, 280)
+	viewport.Position = UDim2.new(0, 10, 0, 10)
+	viewport.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	viewport.Parent = mainFrame
+
+	local camera = Instance.new("Camera")
+	camera.CFrame = CFrame.new(Vector3.new(0, 0, 5), Vector3.new(0, 0, 0))
+	viewport.CurrentCamera = camera
+	camera.Parent = viewport
+
+	local toolSelectButton = Instance.new("TextButton")
+	toolSelectButton.Size = UDim2.new(1, -20, 0, 30)
+	toolSelectButton.Position = UDim2.new(0, 10, 0, 300)
+	toolSelectButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	toolSelectButton.Text = "Select Tool"
+	toolSelectButton.TextColor3 = Color3.new(1, 1, 1)
+	toolSelectButton.Parent = mainFrame
+
+	local toolSelectionFrame = Instance.new("Frame")
+	toolSelectionFrame.Size = UDim2.new(1, -20, 0, 100)
+	toolSelectionFrame.Position = UDim2.new(0, 10, 0, 340)
+	toolSelectionFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	toolSelectionFrame.ZIndex = 3
+	toolSelectionFrame.Visible = false
+	toolSelectionFrame.Parent = mainFrame
+
+	local toolScroll = Instance.new("ScrollingFrame")
+	toolScroll.Size = UDim2.new(1, -10, 1, -10)
+	toolScroll.Position = UDim2.new(0, 5, 0, 5)
+	toolScroll.BackgroundTransparency = 1
+	toolScroll.ScrollBarThickness = 6
+	toolScroll.ZIndex = 2
+	toolScroll.Parent = toolSelectionFrame
+
+	local function updateToolList()
+		for _, child in ipairs(toolScroll:GetChildren()) do
+			child:Destroy()
+		end
+		local backpack = player:WaitForChild("Backpack")
+		local tools = backpack:GetChildren()
+		local buttonHeight = 30
+		local spacing = 5
+		local yPosition = 0
+		toolScroll.CanvasSize = UDim2.new(0, 0, 0, #tools * (buttonHeight + spacing))
+		for i, tool in ipairs(tools) do
+			if tool:IsA("Tool") then
+				local toolButton = Instance.new("TextButton")
+				toolButton.Size = UDim2.new(1, -10, 0, buttonHeight)
+				toolButton.Position = UDim2.new(0, 5, 0, yPosition)
+				toolButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+				toolButton.Text = tool.Name
+				toolButton.TextColor3 = Color3.new(1, 1, 1)
+				toolButton.ZIndex = 4
+				toolButton.Parent = toolScroll
+				toolButton.MouseButton1Click:Connect(function()
+					if viewportTool then
+						viewportTool:Destroy()
+					end
+					currentTool = tool
+					viewportTool = tool:Clone()
+					viewportTool.Parent = viewport
+					if viewportTool:FindFirstChild("Handle") then
+						viewportTool:PivotTo(CFrame.new(Vector3.new(0, 0, 0)) * 
+							CFrame.fromEulerAnglesXYZ(viewportRotation.X, viewportRotation.Y, viewportRotation.Z))
+					end
+					toolSelectionFrame.Visible = false
+				end)
+				yPosition = yPosition + buttonHeight + spacing
+			end
+		end
+	end
+
+	toolSelectButton.MouseButton1Click:Connect(function()
+		toolSelectionFrame.Visible = not toolSelectionFrame.Visible
+		if toolSelectionFrame.Visible then
+			updateToolList()
+		end
+	end)
+
+	local slidersFrame = Instance.new("Frame")
+	slidersFrame.Size = UDim2.new(1, -20, 0, 90)
+	slidersFrame.Position = UDim2.new(0, 10, 0, 340)
+	slidersFrame.BackgroundTransparency = 1
+	slidersFrame.Parent = mainFrame
+
+	local sliders = {}
+
+	local function createSlider(title, yPos)
+		local sliderFrame = Instance.new("Frame")
+		sliderFrame.Size = UDim2.new(1, 0, 0, 25)
+		sliderFrame.Position = UDim2.new(0, 0, 0, yPos)
+		sliderFrame.BackgroundTransparency = 1
+		sliderFrame.Parent = slidersFrame
+
+		local titleLabel = Instance.new("TextLabel")
+		titleLabel.Size = UDim2.new(0, 80, 1, 0)
+		titleLabel.Position = UDim2.new(0, 0, 0, 0)
+		titleLabel.BackgroundTransparency = 1
+		titleLabel.Text = title
+		titleLabel.TextColor3 = Color3.new(1, 1, 1)
+		titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+		titleLabel.Parent = sliderFrame
+
+		local sliderBg = Instance.new("Frame")
+		sliderBg.Size = UDim2.new(0, 120, 0, 4)
+		sliderBg.Position = UDim2.new(0, 90, 0.5, -2)
+		sliderBg.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+		sliderBg.BorderSizePixel = 0
+		sliderBg.Parent = sliderFrame
+
+		local sliderBtn = Instance.new("TextButton")
+		sliderBtn.Size = UDim2.new(0, 16, 0, 16)
+		sliderBtn.Position = UDim2.new(0.5, -8, 0.5, -8)
+		sliderBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		sliderBtn.Text = ""
+		sliderBtn.Parent = sliderBg
+
+		local angleInput = Instance.new("TextBox")
+		angleInput.Size = UDim2.new(0, 50, 0, 20)
+		angleInput.Position = UDim2.new(1, -50, 0, 2)
+		angleInput.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+		angleInput.TextColor3 = Color3.new(1, 1, 1)
+		angleInput.Text = "0"
+		angleInput.PlaceholderText = "Angle"
+		angleInput.TextXAlignment = Enum.TextXAlignment.Center
+		angleInput.Parent = sliderFrame
+
+		local degreeLabel = Instance.new("TextLabel")
+		degreeLabel.Size = UDim2.new(0, 20, 1, 0)
+		degreeLabel.Position = UDim2.new(1, -15, 0, 0)
+		degreeLabel.BackgroundTransparency = 1
+		degreeLabel.Text = "°"
+		degreeLabel.TextColor3 = Color3.new(1, 1, 1)
+		degreeLabel.TextXAlignment = Enum.TextXAlignment.Left
+		degreeLabel.Parent = sliderFrame
+
+		local dragging = false
+
+		local function updateFromAngle(angle)
+			angle = math.clamp(angle, -180, 180)
+			local relativePos = (angle + 180) / 360
+			sliderBtn.Position = UDim2.new(relativePos, -8, 0.5, -8)
+			angleInput.Text = tostring(math.floor(angle))
+			if title == "X Rotation" then
+				viewportRotation = Vector3.new(math.rad(angle), viewportRotation.Y, viewportRotation.Z)
+			elseif title == "Y Rotation" then
+				viewportRotation = Vector3.new(viewportRotation.X, math.rad(angle), viewportRotation.Z)
+			elseif title == "Z Rotation" then
+				viewportRotation = Vector3.new(viewportRotation.X, viewportRotation.Y, math.rad(angle))
+			end
+			if viewportTool then
+				viewportTool:PivotTo(CFrame.new(Vector3.new(0, 0, 0)) * 
+					CFrame.fromEulerAnglesXYZ(viewportRotation.X, viewportRotation.Y, viewportRotation.Z))
+			end
+		end
+
+		local function updateSlider(input)
+			local relativePos = math.clamp((input.Position.X - sliderBg.AbsolutePosition.X) / sliderBg.AbsoluteSize.X, 0, 1)
+			local angle = math.floor((relativePos * 360) - 180)
+			updateFromAngle(angle)
+			return angle
+		end
+
+		angleInput.FocusLost:Connect(function(enterPressed)
+			local inputText = angleInput.Text:gsub("[^%-%d]", "")
+			local inputNumber = tonumber(inputText)
+			if inputNumber then
+				inputNumber = math.clamp(inputNumber, -180, 180)
+				updateFromAngle(inputNumber)
+			else
+				angleInput.Text = "0"
+				updateFromAngle(0)
+			end
+		end)
+
+		sliderBtn.MouseButton1Down:Connect(function()
+			dragging = true
+		end)
+		UserInputService.InputChanged:Connect(function(input)
+			if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+				updateSlider(input)
+			end
+		end)
+		UserInputService.InputEnded:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				dragging = false
+			end
+		end)
+		return {
+			frame = sliderFrame,
+			updateValue = function(value)
+				updateFromAngle(value)
+			end
+		}
+	end
+
+	local xSlider = createSlider("X Rotation", 0)
+	local ySlider = createSlider("Y Rotation", 30)
+	local zSlider = createSlider("Z Rotation", 60)
+
+	sliders = {xSlider, ySlider, zSlider}
+
+	local applyButton = Instance.new("TextButton")
+	applyButton.Size = UDim2.new(1, -20, 0, 30)
+	applyButton.Position = UDim2.new(0, 10, 0, 440)
+	applyButton.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
+	applyButton.Text = "Apply Rotation"
+	applyButton.TextColor3 = Color3.new(1, 1, 1)
+	applyButton.Parent = mainFrame
+
+	local resetButton = Instance.new("TextButton")
+	resetButton.Size = UDim2.new(1, -20, 0, 30)
+	resetButton.Position = UDim2.new(0, 10, 0, 480)
+	resetButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+	resetButton.Text = "Reset Orientation"
+	resetButton.TextColor3 = Color3.new(1, 1, 1)
+	resetButton.Parent = mainFrame
+
+	applyButton.MouseButton1Click:Connect(function()
+		if currentTool then
+			-- Apply the rotation to the controlPart
+			if controlPart then
+				controlPart.CFrame = CFrame.new(controlPart.Position) * CFrame.fromEulerAnglesXYZ(viewportRotation.X, viewportRotation.Y, viewportRotation.Z)
+			end
+
+			-- Apply the rotation to the tool
+			local handle = currentTool:FindFirstChild("Handle")
+			if handle then
+				handle.CFrame = CFrame.new(handle.Position) * CFrame.fromEulerAnglesXYZ(viewportRotation.X, viewportRotation.Y, viewportRotation.Z)
+			end
+
+			-- Enable drone control
+			enableDroneControl()
+			screenGui:Destroy()
+			uiOpen = false
+		end
+	end)
+	resetButton.MouseButton1Click:Connect(function()
+		viewportRotation = Vector3.new(0, 0, 0)
+		if controlPart then
+			controlPart.CFrame = CFrame.new(controlPart.Position)
+		end
+		if viewportTool then
+			viewportTool:PivotTo(CFrame.new(Vector3.new(0, 0, 0)))
+		end
+		for _, slider in ipairs(sliders) do
+			slider.updateValue(0)
+		end
+	end)
+	return {
+		gui = screenGui,
+		viewport = viewport,
+		destroy = function()
+			if viewportTool then
+				viewportTool:Destroy()
+				viewportTool = nil
+			end
+			screenGui:Destroy()
+		end
+	}
+end
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+	if input.KeyCode == Enum.KeyCode.R then
+		if not uiOpen and not equipped then
+			createViewportInterface()
+			uiOpen = true
+		elseif equipped then
+			disableDroneControl()
+			uiOpen = false
+		end
+	end
+	pressedKeys[input.KeyCode] = true
+end)
+
+
+UserInputService.InputEnded:Connect(function(input, gameProcessed)
+	pressedKeys[input.KeyCode] = false
+end)
+
+RunService.Heartbeat:Connect(function()
+	if not equipped then return end
+
+	local moveVector = Vector3.new(0, 0, 0)
+	if pressedKeys[Enum.KeyCode.W] then
+		moveVector = moveVector + Vector3.new(0, 0, -MOVE_SPEED)
+	end
+	if pressedKeys[Enum.KeyCode.S] then
+		moveVector = moveVector + Vector3.new(0, 0, MOVE_SPEED)
+	end
+	if pressedKeys[Enum.KeyCode.A] then
+		moveVector = moveVector + Vector3.new(-MOVE_SPEED, 0, 0)
+	end
+	if pressedKeys[Enum.KeyCode.D] then
+		moveVector = moveVector + Vector3.new(MOVE_SPEED, 0, 0)
+	end
+	if pressedKeys[Enum.KeyCode.Q] then
+		moveVector = moveVector + Vector3.new(0, -MOVE_SPEED, 0)
+	end
+	if pressedKeys[Enum.KeyCode.E] then
+		moveVector = moveVector + Vector3.new(0, MOVE_SPEED, 0)
+	end
+	updateDronePosition(moveVector)
+end)
+
+local function onCharacterAdded(newCharacter)
+	character = newCharacter
+	equipped = false
+	currentTool = nil
+	toolAnimTrack = nil
+	if controlPart then
+		controlPart:Destroy()
+		controlPart = nil
+	end
+	RunService:UnbindFromRenderStep("DroneCameraUpdate")
+	camera.CameraType = Enum.CameraType.Custom
+	UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+	restorePlayerMovement()
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
