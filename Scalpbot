@@ -126,7 +126,7 @@ end
                  
                               
                
-loadstring(game:HttpGet('https://raw.githubusercontent.com/moon6007/Scripts/main/rp%20games/ReturnerBOT%20v6'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
                  
                  ]])
 end
