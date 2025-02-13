@@ -1,3 +1,13 @@
+
+getgenv().speed = 40
+getgenv().walkspeed = 40
+getgenv().DisableAnimate = false
+
+getgenv().AnimationPack = "pirate"
+
+getgenv().UsePathfinding = false
+
+
 --originally By NathanReturns additions by mo_on
 
 getgenv().noclip = true
