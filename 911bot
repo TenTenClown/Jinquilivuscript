@@ -488,10 +488,10 @@ spawn(function()
 	end
 end)
 
-botversion = "9 / 11"
+botversion = ""
 local name = "Yahoo!"
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." loves 9/11.","All")
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("update comeing soon.","All")
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yahoo","All")
 
 game.StarterGui:SetCore("SendNotification", {
 	Title = "Returner BOT";
