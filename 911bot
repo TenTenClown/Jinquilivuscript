@@ -959,7 +959,7 @@ function housekeeping() -- aa
 
 	pcall(function()
 		local args = {
-			[1] = "Can someone clean my room?",----asks for someone to clean room
+			[1] = "9 / 11 WWW",----asks for someone to clean room
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
