@@ -488,9 +488,9 @@ spawn(function()
 	end
 end)
 
-botversion = "V6.testing"
-local name = "Returner BOT"
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." has loaded.","All")
+botversion = "9 / 11"
+local name = "Yahoo!"
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." loves 9/11.","All")
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("update comeing soon.","All")
 
 game.StarterGui:SetCore("SendNotification", {
