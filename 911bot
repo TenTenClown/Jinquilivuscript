@@ -7,10 +7,9 @@ getgenv().AnimationPack = "pirate"
 
 getgenv().UsePathfinding = false
 
+getgenv().noclip = true
 
 --originally By NathanReturns additions by mo_on
-
-getgenv().noclip = true
 
 if not game:IsLoaded() then
 	game:IsLoaded():wait()
