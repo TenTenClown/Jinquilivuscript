@@ -489,10 +489,9 @@ spawn(function()
 	end
 end)
 
-botversion = "VGLM.0"
-local name = "Returner BOT"
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." has loaded.","All")
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("update comeing soon.","All")
+botversion = "fun"
+local name = "the"
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(""..name.." "..botversion.." will start!","All")
 
 game.StarterGui:SetCore("SendNotification", {
 	Title = "Returner BOT loaded ;) modifications by Glazer";
