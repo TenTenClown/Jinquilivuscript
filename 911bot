@@ -457,7 +457,7 @@ task.spawn(function()
 		if targetPlayer then
 			wait(0.25)
 			local args = {
-				[1] = "9/11 WWWW "..targetPlayer.Name.."",
+				[1] = "9 / 11 WWW"..targetPlayer.Name.."",
 				[2] = "All"
 			}          
 			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
