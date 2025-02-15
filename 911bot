@@ -987,7 +987,7 @@ function bar() -- aa
 	walkto(Vector3.new(68, 43, 19))
 	pcall(function()
 		local args = {
-			[1] = "Could i get a yahoo?",----asks for food
+			[1] = "",----asks for food
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
