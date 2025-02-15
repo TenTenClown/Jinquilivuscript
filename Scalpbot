@@ -147,7 +147,7 @@ while true do
 
 				queueonteleport()
 
-				wait(2)
+				wait(1)
 				rejoin = true
 			return
 		end
