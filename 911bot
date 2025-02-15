@@ -119,7 +119,7 @@ end
                  
                               
                
-loadstring(game:HttpGet('https://raw.githubusercontent.com/moon6007/Scripts/main/rp%20games/ReturnerBOT%20v6'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/911bot"))()
                  
                  ]])
 end
@@ -209,19 +209,19 @@ local nooneatdeak = {
 	"ALLAH ON TOP",
 	"THE PENTAGON SHOULD HAVE BURNED!",
 	"9 / 11 is a cool event",
-	"9 / 11 haters are twincs",
-    "I could rlly go raep a hot girl..",
+	"9 / 11 haters are twinsk",
+    "I could rlly go boinc a hot girl..",
     "9 / 11 should have kept going",
 	"SOMEONE GET A PLANE TO CRASH INTO THIS HOTEL",
 	"I fought along side the rizzler:Osama",
-	"PLEASE HAVE SOMEONE COME TO THE TALlBAN MEETING",
+	"PLEASE HAVE SOMEONE COME TO THE TALBAN MEETING",
 	"I’M AT THE DESK AND NEED ASSISTANCE URGENTLY.",
 	"I NEED SOMEONE AT THE DESK WITHOUT DELAY.",
 	"CAN SOMEONE SH)OOT ME?",
 	"OSAMA DID THE RIGHT THING",
 	"⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻",
 	"⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻",
-	"I NEED ASSISTANCE WITH BOMBING THIS HOTEL",
+	"I NEED ASSISTANCE WITH BOOMING THIS HOTEL",
 	"The U.S. blew up our medical facility!",
 	"Someone gear me up i need to get materials to build a pip bomb"
 }
@@ -485,10 +485,10 @@ spawn(function()
 	end
 end)
 
-botversion = "V6.testing"
-local name = "Returner BOT"
+botversion = "Yahoo "
+local name = "9 / 11"
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." has loaded.","All")
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("update comeing soon.","All")
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("9 / 11 Bot!.","All")
 
 game.StarterGui:SetCore("SendNotification", {
 	Title = "Returner BOT";
@@ -987,7 +987,7 @@ function bar() -- aa
 	walkto(Vector3.new(68, 43, 19))
 	pcall(function()
 		local args = {
-			[1] = "Could i get a yahoo yahoo yahoo?",----asks for food
+			[1] = "Could i get a yahoo?",----asks for food
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
