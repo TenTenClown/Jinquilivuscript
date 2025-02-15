@@ -1,15 +1,13 @@
+getgenv().noclip = true
 getgenv().speed = 40
 getgenv().walkspeed = 40
 getgenv().DisableAnimate = false
 
 getgenv().AnimationPack = "Pirate"
 
-getgenv().UsePathfinding = false
-
 
 --originally By NathanReturns additions by mo_on
 
-getgenv().noclip = true
 
 if not game:IsLoaded() then
 	game:IsLoaded():wait()
@@ -121,7 +119,7 @@ end
                  
                               
                
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/911bot"))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/moon6007/Scripts/main/rp%20games/ReturnerBOT%20v6'))()
                  
                  ]])
 end
@@ -150,7 +148,6 @@ while true do
 	task.wait(1)
 end
 end)
-
 
 local room = {
 	"σ几 รⓔⓜ丅乇м𝓑έℝ 11, ２Ѳ０１, 8:４❻ ＡM , flight 11 crashes into the world trade center's north tower",
@@ -460,7 +457,7 @@ task.spawn(function()
 		if targetPlayer then
 			wait(0.25)
 			local args = {
-				[1] = "⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻"..targetPlayer.Name..,
+				[1] = "9/11 WWWW "..targetPlayer.Name.."",
 				[2] = "All"
 			}          
 			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -488,10 +485,10 @@ spawn(function()
 	end
 end)
 
-botversion = ""
-local name = "Yahoo!"
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." 9/11.","All")
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yahoo","All")
+botversion = "V6.testing"
+local name = "Returner BOT"
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("["..name.."]: "..botversion.." has loaded.","All")
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("update comeing soon.","All")
 
 game.StarterGui:SetCore("SendNotification", {
 	Title = "Returner BOT";
@@ -959,7 +956,7 @@ function housekeeping() -- aa
 
 	pcall(function()
 		local args = {
-			[1] = "9 / 11 WWW",----asks for someone to clean room
+			[1] = "Can someone bomb this place?",----asks for someone to clean room
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -979,7 +976,7 @@ function bar() -- aa
 
 	pcall(function()
 		local args = {
-			[1] = "σ几 รⓔⓜ丅乇м𝓑έℝ 11, ２Ѳ０１, 8:４❻ ＡM , flight 11 crashes into the world trade center's north tower",----asks for food
+			[1] = "Could i get a 9 / 11 subway meal?",----asks for food
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -990,7 +987,7 @@ function bar() -- aa
 	walkto(Vector3.new(68, 43, 19))
 	pcall(function()
 		local args = {
-			[1] = "at ９:０3 ＡⓂ flight 175 hit the south tower",----asks for food
+			[1] = "Could i get a yahoo yahoo yahoo?",----asks for food
 			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -1000,8 +997,8 @@ function bar() -- aa
 	walkto(Vector3.new(68, 43, 10))
 	pcall(function()
 		local args = {
-			[1] = "Shhh don't tell staff im Osama",----asks for food
-			[2] = "Team"
+			[1] = "I HATE BUSH! HE INVADED OUR COUNTRY",----asks for food
+			[2] = "All"
 		}          
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
 	end
