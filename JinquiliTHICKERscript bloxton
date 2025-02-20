@@ -245,8 +245,107 @@ PrivateProperties = {
 	chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
 end, 90)
 
-createButton("Coming Soon", function()
-print("its coming soon you stupid fucking dipwad. what did you think would happen?")
+createButton("GLM Advertisement Spam", function()
+-- Flag to control whether the loop should be running
+local isRunning = true
+
+-- Function to toggle the running state when "J" is pressed
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.J then
+        isRunning = not isRunning
+        if isRunning then
+            print("Script started.")
+        else
+            print("Script stopped.")
+        end
+    end
+end)
+
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+if game.PlaceId == 18742542127 then 
+    error("raid lobby",0)
+    return
+end
+
+local spammsg = "⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻🅘🅕 🅨🅞🅤 🅛🅘🅚🅔 🅑🅛🅞🅧🅣🅞🅝 🅣🅡🅞🅛🅛🅘🅝🅖 🅣🅗🅔🅝 🅙🅞🅘🅝 🅓🅞🅣 🅖🅖 / 🅖🅛🅜"
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+-- Get the local player and their character
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Wait until the character is fully loaded
+if not character.Parent then
+    character.AncestryChanged:Wait()
+end
+
+-- Get the HumanoidRootPart of the character
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local Float = Instance.new('Part')
+Float.Name = "floatthing"
+Float.Parent = game.Workspace
+Float.Transparency = 1
+Float.Size = Vector3.new(2048,0.3,2048)
+Float.Anchored = true
+local FloatValue = -3.1
+Float.CFrame = CFrame.new(0,39,0)
+
+local function tweento(x,y,z)
+    local targetCFrame = CFrame.new(Vector3.new(x,y,z))
+    -- Define the tweening information
+    local tweenInfo = TweenInfo.new(
+        0.4, -- Time (in seconds)
+        Enum.EasingStyle.Quad, -- EasingStyle
+        Enum.EasingDirection.Out, -- EasingDirection
+        0, -- RepeatCount (0 means no repeat)
+        false, -- Reverses (tween will not reverse)
+        0 -- DelayTime
+    )
+    local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = targetCFrame})
+
+    tween:Play()
+    tween.Completed:Wait()
+    
+    if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Sit then
+        game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Sit = false
+    end
+    
+    game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
+    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(spammsg, "All")
+end
+
+-- Main loop
+while true do
+    if isRunning then
+        tweento(78, 39, 139)
+        tweento(78, 39, 176)
+        tweento(121, 39, 176)
+        tweento(121, 39, 5)
+        tweento(76, 39, 5)
+        tweento(76, 39, 44)
+        tweento(105, 39, 44)
+        tweento(105, 39, 63)
+        tweento(80, 39, 63)
+        tweento(80, 39, 116)
+        tweento(105, 39, 116)
+        tweento(105, 39, 141)
+    end
+    task.wait(0.1)  -- Slight delay to prevent overwhelming the CPU
+end
+for _, i in pairs(game.Workspace:GetDescendants()) do
+    if i.ClassName == "Seat" then
+        i.Disabled = true
+    end
+end
+print('done')
 end, 120)
 
 createButton("Coming Soon", function()
