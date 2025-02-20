@@ -244,23 +244,23 @@ PrivateProperties = {
 	chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
 end, 90)
 
-createButton("See Warnings", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/illumina0001/bloxton/main/seewarnings.lua"))()
+createButton("Coming Soon", function()
+insert silly code here"))()
 end, 120)
 
-createButton("Bypasser", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AlgariBot/lua/refs/heads/Lua-Script-Executor/LocalNeverPatchedBypass.txt"))()
+createButton("Coming Soon", function()
+silly code enter here"))()
 end, 150)
 
-createButton("Penis Plate", function()
-loadstring(game:HttpGet("https://tuxer.xyz/loader?file=penisplates"))()
+createButton("Coming Soon", function()
+do some silly code stuff here silly silly bbq"))()
 end, 180)
 
-createButton("Nameless", function()
+createButton("Nameless Admin", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))()
 end, 210)
 
-createButton("infinite yield", function()
+createButton("Infinite Yield", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end, 240)
 
@@ -272,7 +272,7 @@ createButton("Scalp Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
 end, 300)
 
-createButton("fake cuff", function()
+createButton("Fake Cuff", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/fakecuff"))()
 end, 330)
 
@@ -284,7 +284,7 @@ createButton("R6", function()
     loadstring(game:HttpGet('https://korisnik99.neocities.org/message%20(6).txt'))()
 end, 390)
 
-createButton("animation changer", function()
+createButton("Animation Changer", function()
 local AnimationChanger = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local TopBar = Instance.new("Frame")
@@ -965,15 +965,15 @@ wait(1)
 Main:TweenPosition(UDim2.new(0.421999991, 0, 0.28400004, 0))
 end, 420)
 
-createButton("jerkin", function()
-loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+createButton("Coming Soon", function()
+woooah hell no gonna replace this 1"))()
 end, 450)
 
 createButton("Dead Body Pose", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/y9T3mzqD"))()
 end, 480)
 
-createButton("Prop Controler", function()
+createButton("Item Drone", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Prop%20Control"))()
 end, 510)
 
