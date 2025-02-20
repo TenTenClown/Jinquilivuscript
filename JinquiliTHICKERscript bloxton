@@ -341,7 +341,7 @@ while true do
     task.wait(0.1)  -- Slight delay to prevent overwhelming the CPU
 end
 end, 120)
-createButton("Fake Chats (Press C)", function()
+createButton("Fake Chats", function()
 local Players = game:GetService("Players")
 local ChatService = game:GetService("Chat")
 local UserInputService = game:GetService("UserInputService")
@@ -380,6 +380,19 @@ commandBar.PlaceholderText = "Type: Name Message and press Enter"
 commandBar.Text = ""
 commandBar.Parent = commandBarFrame
 
+------------------------------------------------------------------
+-- Toggle Button (draggable)
+------------------------------------------------------------------
+local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "ToggleButton"
+toggleButton.Size = UDim2.new(0, 50, 0, 30)
+toggleButton.Position = UDim2.new(0, 10, 0.5, -15)
+toggleButton.Text = "Open"
+toggleButton.Active = true       -- allow for dragging
+toggleButton.Draggable = true    -- make it draggable
+toggleButton.Parent = screenGui
+
+local commandBarOpen = false
 
 ------------------------------------------------------------------
 -- Tween Functions
