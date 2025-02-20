@@ -302,7 +302,7 @@ local function tweento(x,y,z)
     local targetCFrame = CFrame.new(Vector3.new(x,y,z))
     -- Define the tweening information
     local tweenInfo = TweenInfo.new(
-        0.4, -- Time (in seconds)
+        0.3, -- Time (in seconds)
         Enum.EasingStyle.Quad, -- EasingStyle
         Enum.EasingDirection.Out, -- EasingDirection
         0, -- RepeatCount (0 means no repeat)
@@ -340,16 +340,200 @@ while true do
     end
     task.wait(0.1)  -- Slight delay to prevent overwhelming the CPU
 end
-for _, i in pairs(game.Workspace:GetDescendants()) do
-    if i.ClassName == "Seat" then
-        i.Disabled = true
+createButton("Fake Chats (Press C)", function()
+local Players = game:GetService("Players")
+local ChatService = game:GetService("Chat")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local StarterGui = game:GetService("StarterGui")
+
+local localPlayer = Players.LocalPlayer
+
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CommandBarGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = localPlayer:WaitForChild("PlayerGui")
+
+------------------------------------------------------------------
+-- Command Bar Frame (initially off-screen)
+------------------------------------------------------------------
+local commandBarFrame = Instance.new("Frame")
+commandBarFrame.Name = "CommandBarFrame"
+commandBarFrame.Size = UDim2.new(0, 300, 0, 40)
+-- start off-screen (below the visible area)
+commandBarFrame.Position = UDim2.new(0.5, -150, 1, 10)
+commandBarFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+commandBarFrame.BorderSizePixel = 2
+commandBarFrame.Visible = false
+commandBarFrame.Parent = screenGui
+
+-- Command Bar TextBox
+local commandBar = Instance.new("TextBox")
+commandBar.Name = "CommandBar"
+commandBar.Size = UDim2.new(1, -10, 1, -10)
+commandBar.Position = UDim2.new(0, 5, 0, 5)
+commandBar.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+commandBar.ClearTextOnFocus = false
+commandBar.PlaceholderText = "Type: Name Message and press Enter"
+commandBar.Text = ""
+commandBar.Parent = commandBarFrame
+
+
+------------------------------------------------------------------
+-- Tween Functions
+------------------------------------------------------------------
+local function tweenCommandBarUp()
+    commandBarFrame.Visible = true
+    local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local goal = {Position = UDim2.new(0.5, -150, 0.9, 0)}
+    local tween = TweenService:Create(commandBarFrame, tweenInfo, goal)
+    tween:Play()
+end
+
+local function tweenCommandBarDown()
+    local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+    local goal = {Position = UDim2.new(0.5, -150, 1, 10)}
+    local tween = TweenService:Create(commandBarFrame, tweenInfo, goal)
+    tween:Play()
+    tween.Completed:Connect(function()
+        commandBarFrame.Visible = false
+    end)
+end
+
+------------------------------------------------------------------
+-- Toggle Command Bar
+------------------------------------------------------------------
+local function toggleCommandBar()
+    commandBarOpen = not commandBarOpen
+    if commandBarOpen then
+        toggleButton.Text = "Close"
+        tweenCommandBarUp()
+        -- We'll focus the TextBox AFTER the bar is shown
+        -- (but only once "C" is released -- see InputEnded below)
+    else
+        toggleButton.Text = "Open"
+        tweenCommandBarDown()
     end
 end
-print('done')
-end, 120)
 
-createButton("Coming Soon", function()
-print("its coming soon you stupid fucking dipwad. what did you think would happen?")
+toggleButton.MouseButton1Click:Connect(toggleCommandBar)
+
+------------------------------------------------------------------
+-- Hide/Show ALL UI with "T"
+------------------------------------------------------------------
+local uiHidden = false
+
+------------------------------------------------------------------
+-- Key Handling (on InputEnded to avoid typing "c")
+------------------------------------------------------------------
+UserInputService.InputEnded:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+
+    if input.KeyCode == Enum.KeyCode.C then
+        -- Toggle the command bar on key release
+        toggleCommandBar()
+        if commandBarOpen then
+            -- Now that "C" is fully released, focus the TextBox
+            commandBar:CaptureFocus()
+        end
+
+    elseif input.KeyCode == Enum.KeyCode.T then
+        -- Hide/Show entire UI
+        uiHidden = not uiHidden
+        if uiHidden then
+            toggleButton.Visible = false
+            commandBarFrame.Visible = false
+            commandBarOpen = false
+        else
+            toggleButton.Visible = true
+            toggleButton.Text = "Open"
+            commandBarFrame.Visible = false
+        end
+    end
+end)
+
+------------------------------------------------------------------
+-- Helper: Convert Color3 to Hex
+------------------------------------------------------------------
+local function Color3ToHex(color)
+    return string.format("#%02X%02X%02X",
+        math.floor(color.R * 255),
+        math.floor(color.G * 255),
+        math.floor(color.B * 255)
+    )
+end
+
+------------------------------------------------------------------
+-- Handle Enter in Command Bar
+------------------------------------------------------------------
+commandBar.FocusLost:Connect(function(enterPressed)
+    if not enterPressed then return end
+    
+    local text = commandBar.Text
+    if text == "" then
+        warn("No input provided.")
+    else
+        -- Parse the command:
+        -- first word = target's name, the rest = message
+        local spaceIndex = string.find(text, " ")
+        if not spaceIndex then
+            warn("Please type the target name and a message, separated by a space.")
+        else
+            local pName = text:sub(1, spaceIndex - 1)
+            local msg = text:sub(spaceIndex + 1)
+
+            if pName == "" or msg == "" then
+                warn("Please provide both a target name and a message.")
+            else
+                -- Find the target player: exact or partial match
+                local targetPlayer = Players:FindFirstChild(pName)
+                if not targetPlayer then
+                    for _, p in ipairs(Players:GetPlayers()) do
+                        local displayLower = string.lower(p.DisplayName)
+                        local nameLower = string.lower(p.Name)
+                        local inputLower = string.lower(pName)
+                        if string.find(displayLower, inputLower) or string.find(nameLower, inputLower) then
+                            targetPlayer = p
+                            break
+                        end
+                    end
+                end
+
+                if not targetPlayer then
+                    warn("No matching player found for:", pName)
+                else
+                    -- Determine chat color
+                    local chatColor = targetPlayer.Team and targetPlayer.Team.TeamColor.Color or Color3.fromRGB(255, 255, 255)
+                    local hexColor = Color3ToHex(chatColor)
+
+                    local displayName = targetPlayer.DisplayName or targetPlayer.Name
+
+                    -- Bubble chat (if player's head exists)
+                    if targetPlayer.Character and targetPlayer.Character:FindFirstChild("Head") then
+                        ChatService:Chat(targetPlayer.Character.Head, msg, Enum.ChatColor.White)
+                    end
+
+                    -- System message: [Name]: Message
+                    StarterGui:SetCore("ChatMakeSystemMessage", {
+                        Text = string.format('<font color="%s">[%s]:</font> %s', hexColor, displayName, msg),
+                        Font = Enum.Font.SourceSansBold,
+                        FontSize = Enum.FontSize.Size96,
+                        Color = Color3.fromRGB(255, 255, 255),
+                    })
+                end
+            end
+        end
+    end
+
+    -- Always close the bar after Enter
+    commandBar.Text = ""
+    if commandBarOpen then
+        commandBarOpen = false
+        toggleButton.Text = "Open"
+        tweenCommandBarDown()
+    end
+end)
 end, 150)
 
 createButton("Coming Soon", function()
