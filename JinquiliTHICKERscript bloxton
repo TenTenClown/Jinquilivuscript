@@ -245,15 +245,15 @@ PrivateProperties = {
 end, 90)
 
 createButton("Coming Soon", function()
-insert silly code here"))()
+print("its coming soon you stupid fucking dipwad. what did you think would happen?")
 end, 120)
 
 createButton("Coming Soon", function()
-silly code enter here"))()
+print("its coming soon you stupid fucking dipwad. what did you think would happen?")
 end, 150)
 
 createButton("Coming Soon", function()
-do some silly code stuff here silly silly bbq"))()
+print("its coming soon you stupid fucking dipwad. what did you think would happen?")
 end, 180)
 
 createButton("Nameless Admin", function()
@@ -966,7 +966,7 @@ Main:TweenPosition(UDim2.new(0.421999991, 0, 0.28400004, 0))
 end, 420)
 
 createButton("Coming Soon", function()
-woooah hell no gonna replace this 1"))()
+print("its coming soon you stupid fucking dipwad. what did you think would happen?")
 end, 450)
 
 createButton("Dead Body Pose", function()
