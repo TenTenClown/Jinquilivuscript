@@ -340,6 +340,7 @@ while true do
     end
     task.wait(0.1)  -- Slight delay to prevent overwhelming the CPU
 end
+end, 120)
 createButton("Fake Chats (Press C)", function()
 local Players = game:GetService("Players")
 local ChatService = game:GetService("Chat")
