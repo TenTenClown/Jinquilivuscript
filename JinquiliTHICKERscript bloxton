@@ -272,7 +272,7 @@ if game.PlaceId == 18742542127 then
     return
 end
 
-local spammsg = "⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻🅘🅕 🅨🅞🅤 🅛🅘🅚🅔 🅑🅛🅞🅧🅣🅞🅝 🅣🅡🅞🅛🅛🅘🅝🅖 🅣🅗🅔🅝 🅙🅞🅘🅝 🅓🅞🅣 🅖🅖 / 🅖🅛🅜"
+local spammsg = "⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻🅘🅕 🅨🅞🅤 🅛🅘🅚🅔 🅑🅛🅞🅧🅣🅞🅝 🅣🅡🅞🅛🅛🅘🅝🅖 🅣🅗🅔🅝 🅐🅓🅓 🅖🅡🅔🅔🅝❷❽❷❸❼ 🅞🅝 🅑🅛🅤🅔 🅐🅟🅟"
 
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
@@ -562,10 +562,10 @@ createButton("Infinite Yield", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end, 240)
 
-createButton("Glazer Bot", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Glazerbot"))()
+createButton("Coming Soon", function()
+print("its coming soon you stupid fucking dipwad. what did you think would happen?")
 end, 270)
---yahoo
+--dont blame me. glazerbot sucked dick bro.
 createButton("Scalp Bot", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TenTenClown/Jinquilivuscript/refs/heads/main/Scalpbot"))()
 end, 300)
