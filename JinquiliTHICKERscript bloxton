@@ -384,8 +384,16 @@ commandBar.FocusLost:Connect(function(enterPressed)
 end)
 end, 150)
 
-createButton("Coming Soon", function()
-print("its coming soon you stupid fucking dipwad. what did you think would happen?")
+createButton("Advertisement spam", function()
+local TextChatService = game:GetService("TextChatService")
+function chat(msg)
+
+            TextChatService.TextChannels.RBXGeneral:SendAsync(msg)
+
+    end
+
+                blob = "\u{000D}"
+                chat("." .. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. " ".. blob .. "Like trolling? Add green28237 on blue app")
 end, 180)
 
 createButton("Nameless Admin", function()
